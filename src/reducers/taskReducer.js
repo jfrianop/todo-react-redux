@@ -1,6 +1,6 @@
 import { FETCH_TASKS } from '../actions/types';
 
-const initialState = {
+export const initialState = {
   tasks: []
 };
 

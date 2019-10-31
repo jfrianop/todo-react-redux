@@ -6,15 +6,29 @@ const taskAPI = axios.create({
   timeout: 1000
 })
 
-export const fetchTasks = () => dispatch => {
-  taskAPI.get('/tasks')
-    .then(tasks =>
-      dispatch({
-        type: FETCH_TASKS,
-        payload: tasks.data
-      })
+export function fetchTasks() {
+  return function (dispatch) {
+    return (
+      axios.get('http://localhost:3001/tasks')
+        .then(({ data }) => {
+          dispatch({
+            type: FETCH_TASKS,
+            payload: data,
+          })
+        })
     );
-};
+  }
+}
+
+// export const fetchTasks = () => dispatch => {
+//   taskAPI.get('/tasks')
+//     .then(tasks =>
+//       dispatch({
+//         type: FETCH_TASKS,
+//         payload: tasks.data
+//       })
+//     );
+// };
 
 export const createTask = taskData => dispatch => {
   taskAPI.post('/tasks', taskData)

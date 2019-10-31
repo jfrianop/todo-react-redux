@@ -10,6 +10,7 @@ function Tasks({ tasks, fetchTasks, toggleTask }) {
   const handleClick = (e) => {
     toggleTask(e.target.id)
   };
+
   const taskItems = tasks.map(task => (
     <li id={task.id} key={task.id} onClick={handleClick} className={task.done ? "done" : "undone"}>
       {task.title}
@@ -26,8 +27,7 @@ function Tasks({ tasks, fetchTasks, toggleTask }) {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
-  return { tasks: state.task.tasks }
+  return { tasks: state.taskReducer.tasks }
 };
 
 export default connect(mapStateToProps, { fetchTasks, toggleTask })(Tasks);
